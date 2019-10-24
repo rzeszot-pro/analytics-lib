@@ -37,7 +37,6 @@ final class CollectorTests: XCTestCase {
         sut.track("example", times: 5)
 
         XCTAssertEqual(sut.dispose().count, 3)
-        XCTAssertEqual(sut.dispose().count, 2)
         XCTAssertEqual(sut.dispose().count, 0)
     }
 

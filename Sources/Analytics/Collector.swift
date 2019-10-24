@@ -16,7 +16,7 @@ public class Collector {
     // MARK: -
 
     struct Entry {
-        let date: Date = .init()
+        var date: Date
         let type: String
         let parameters: [String: Any]
     }
@@ -30,14 +30,29 @@ public class Collector {
     // MARK: -
 
     public func track(_ type: String, parameters: [String: Any] = [:]) {
-        let entry = Entry(type: type, parameters: parameters)
+        let entry = Entry(date: .init(), type: type, parameters: parameters)
+
+        print("analytics | collector | track \(type)")
+
         entries.append(entry)
     }
 
     internal func dispose() -> [Entry] {
-        let slice = entries.prefix(upTo: limit)
+        guard count >= limit else { return [] }
+
+        let slice = entries.prefix(limit)
         entries.removeFirst(slice.count)
         return Array(slice)
+    }
+
+    // MARK: -
+
+    internal func store() -> [Entry] {
+        entries
+    }
+
+    func load(entries: [Entry]) {
+        self.entries = entries
     }
 
 }
