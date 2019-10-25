@@ -35,7 +35,7 @@ class Storage {
     }
 
     func load() -> Data? {
-        inspect("analytics | storage | load \(path)")
+        inspect("analytics | storage | load")
 
         do {
             return try Data(contentsOf: path)
