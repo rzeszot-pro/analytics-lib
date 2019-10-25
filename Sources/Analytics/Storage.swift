@@ -7,13 +7,13 @@
 
 import Foundation
 
-public class Storage {
+class Storage {
 
     // MARK: -
 
     private let path: URL
 
-    public init(path: URL) {
+    init(path: URL) {
         self.path = path
     }
 
@@ -24,23 +24,23 @@ public class Storage {
 
     // MARK: -
 
-    public func store(data: Data) {
-        print("analytics | storage | store \(path)")
+    func store(data: Data) {
+        inspect("analytics | storage | store")
 
         do {
             try data.write(to: path)
         } catch {
-            print("analytics | storage | store error \(error) ")
+            inspect("analytics | storage | store error \(error) ")
         }
     }
 
-    public func load() -> Data? {
-        print("analytics | storage | load \(path)")
+    func load() -> Data? {
+        inspect("analytics | storage | load \(path)")
 
         do {
             return try Data(contentsOf: path)
         } catch {
-            print("analytics | storage | load error \(error) ")
+            inspect("analytics | storage | load error \(error) ")
             return nil
         }
     }

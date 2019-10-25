@@ -13,7 +13,7 @@ class Publisher {
     var url: URL = URL(string: "https://analytics.rzeszot.pro/api/collector")!
 
     func publish(data: Data) {
-        print("analytics | publisher | publish")
+        inspect("analytics | publisher | publish")
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"

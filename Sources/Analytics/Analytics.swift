@@ -43,9 +43,7 @@ public class Analytics {
         let entries = serializer.deserialize(data: data)
         collector.load(entries: entries)
 
-        #if DEBUG
-        print("analytics | loaded \(entries.count) events")
-        #endif
+        inspect("analytics | loaded \(entries.count) events")
     }
 
     func track(_ type: String, parameters: Any?) {
@@ -64,9 +62,7 @@ public class Analytics {
 
         storage.store(data: data)
 
-        #if DEBUG
-        print("analytics | archived \(entries.count) events")
-        #endif
+        inspect("analytics | archived \(entries.count) events")
     }
 
 }

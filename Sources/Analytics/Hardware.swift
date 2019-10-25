@@ -11,25 +11,25 @@ import Foundation
 import UIKit
 #endif
 
-public struct Hardware {
+struct Hardware {
 
     // MARK: -
 
-    public static let current: Hardware = .init()
+    static let current: Hardware = .init()
 
     // MARK: -
 
-    public struct System {
+    struct System {
         public let name: String
         public let version: String
     }
 
-    public struct Model {
+    struct Model {
         public let code: String
     }
 
-    public let system: System
-    public let model: Model
+    let system: System
+    let model: Model
 
     // MARK: -
 

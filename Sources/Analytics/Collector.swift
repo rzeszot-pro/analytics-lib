@@ -7,11 +7,11 @@
 
 import Foundation
 
-public class Collector {
+class Collector {
 
     // MARK: -
 
-    public var limit: Int = 10
+    var limit: Int = 10
 
     // MARK: -
 
@@ -21,23 +21,23 @@ public class Collector {
         let parameters: Any?
     }
 
-    internal private(set) var entries: [Entry] = []
+    private(set) var entries: [Entry] = []
 
-    public var count: Int {
+    var count: Int {
         entries.count
     }
 
     // MARK: -
 
-    public func track(_ type: String, parameters: Any? = nil) {
+    func track(_ type: String, parameters: Any? = nil) {
         let entry = Entry(date: .init(), type: type, parameters: parameters)
 
-        print("analytics | collector | track \(type)")
+        inspect("analytics | collector | track \(type)")
 
         entries.append(entry)
     }
 
-    internal func dispose() -> [Entry] {
+    func dispose() -> [Entry] {
         guard count >= limit else { return [] }
 
         let slice = entries.prefix(limit)
@@ -47,7 +47,7 @@ public class Collector {
 
     // MARK: -
 
-    internal func store() -> [Entry] {
+    func store() -> [Entry] {
         entries
     }
 
