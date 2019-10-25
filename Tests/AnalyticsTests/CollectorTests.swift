@@ -52,7 +52,7 @@ final class CollectorTests: XCTestCase {
 }
 
 private extension Collector {
-    func track(_ type: String, parameters: [String: Any] = [:], times: Int) {
+    func track(_ type: String, parameters: Codable? = nil, times: Int) {
         precondition(times > 0)
 
         for _ in 0..<times {

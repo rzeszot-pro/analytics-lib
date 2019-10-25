@@ -18,7 +18,7 @@ public class Collector {
     struct Entry {
         var date: Date
         let type: String
-        let parameters: [String: Any]
+        let parameters: Any?
     }
 
     internal private(set) var entries: [Entry] = []
@@ -29,7 +29,7 @@ public class Collector {
 
     // MARK: -
 
-    public func track(_ type: String, parameters: [String: Any] = [:]) {
+    public func track(_ type: String, parameters: Any? = nil) {
         let entry = Entry(date: .init(), type: type, parameters: parameters)
 
         print("analytics | collector | track \(type)")
