@@ -9,6 +9,7 @@ final class SerializerTests: XCTestCase {
 
     override func setUp() {
         sut = Serializer()
+        sut.now = .now
     }
 
     override func tearDown() {
@@ -22,12 +23,15 @@ final class SerializerTests: XCTestCase {
         let data = sut.serialize(entries: [entry])
 
         let result = """
-            [
-              {
-                "d" : 100000,
-                "t" : "test"
-              }
-            ]
+            {
+              "date" : 100000,
+              "entries" : [
+                {
+                  "d" : 100000,
+                  "t" : "test"
+                }
+              ]
+            }
             """
 
         XCTAssertEqual(String(data: data, encoding: .utf8)!, result)
@@ -38,13 +42,16 @@ final class SerializerTests: XCTestCase {
         let data = sut.serialize(entries: [entry])
 
         let result = """
-            [
-              {
-                "d" : 100000,
-                "t" : "test",
-                "p" : 123
-              }
-            ]
+            {
+              "date" : 100000,
+              "entries" : [
+                {
+                  "d" : 100000,
+                  "t" : "test",
+                  "p" : 123
+                }
+              ]
+            }
             """
 
         XCTAssertEqual(String(data: data, encoding: .utf8)!, result)
@@ -55,13 +62,16 @@ final class SerializerTests: XCTestCase {
         let data = sut.serialize(entries: [entry])
 
         let result = """
-            [
-              {
-                "d" : 100000,
-                "t" : "test",
-                "p" : "string"
-              }
-            ]
+            {
+              "date" : 100000,
+              "entries" : [
+                {
+                  "d" : 100000,
+                  "t" : "test",
+                  "p" : "string"
+                }
+              ]
+            }
             """
 
         XCTAssertEqual(String(data: data, encoding: .utf8)!, result)
@@ -72,13 +82,16 @@ final class SerializerTests: XCTestCase {
         let data = sut.serialize(entries: [entry])
 
         let result = """
-            [
-              {
-                "d" : 100000,
-                "t" : "test",
-                "p" : true
-              }
-            ]
+            {
+              "date" : 100000,
+              "entries" : [
+                {
+                  "d" : 100000,
+                  "t" : "test",
+                  "p" : true
+                }
+              ]
+            }
             """
 
         XCTAssertEqual(String(data: data, encoding: .utf8)!, result)
@@ -89,15 +102,18 @@ final class SerializerTests: XCTestCase {
         let data = sut.serialize(entries: [entry])
 
         let result = """
-            [
-              {
-                "d" : 100000,
-                "t" : "test",
-                "p" : {
-                  "dict" : "yes"
+            {
+              "date" : 100000,
+              "entries" : [
+                {
+                  "d" : 100000,
+                  "t" : "test",
+                  "p" : {
+                    "dict" : "yes"
+                  }
                 }
-              }
-            ]
+              ]
+            }
             """
 
         XCTAssertEqual(String(data: data, encoding: .utf8)!, result)
@@ -113,16 +129,19 @@ final class SerializerTests: XCTestCase {
         let data = sut.serialize(entries: [entry])
 
         let result = """
-            [
-              {
-                "d" : 100000,
-                "t" : "test",
-                "p" : {
-                  "string" : "string",
-                  "bool" : false
+            {
+              "date" : 100000,
+              "entries" : [
+                {
+                  "d" : 100000,
+                  "t" : "test",
+                  "p" : {
+                    "string" : "string",
+                    "bool" : false
+                  }
                 }
-              }
-            ]
+              ]
+            }
             """
 
         XCTAssertEqual(String(data: data, encoding: .utf8)!, result)
@@ -132,12 +151,15 @@ final class SerializerTests: XCTestCase {
 
     func testDeserializeType() {
         let input = """
-            [
-              {
-                "d" : 100000,
-                "t" : "test"
-              }
-            ]
+            {
+              "date" : 100000,
+              "entries" : [
+                {
+                  "d" : 100000,
+                  "t" : "test"
+                }
+              ]
+            }
             """
 
         let entry = sut.deserialize(data: input.data(using: .utf8)!)[0]
@@ -149,13 +171,16 @@ final class SerializerTests: XCTestCase {
 
     func testDeserializeParametersInt() {
         let input = """
-            [
-              {
-                "d" : 100000,
-                "t" : "test",
-                "p" : 123
-              }
-            ]
+            {
+              "date" : 100000,
+              "entries" : [
+                {
+                  "d" : 100000,
+                  "t" : "test",
+                  "p" : 123
+                }
+              ]
+            }
             """
 
         let entry = sut.deserialize(data: input.data(using: .utf8)!)[0]
@@ -167,13 +192,16 @@ final class SerializerTests: XCTestCase {
 
     func testDeserializeParametersString() {
         let input = """
-            [
-              {
-                "d" : 100000,
-                "t" : "test",
-                "p" : "string"
-              }
-            ]
+            {
+              "date" : 10000,
+              "entries" : [
+                {
+                  "d" : 100000,
+                  "t" : "test",
+                  "p" : "string"
+                }
+              ]
+            }
             """
 
         let entry = sut.deserialize(data: input.data(using: .utf8)!)[0]
@@ -185,13 +213,16 @@ final class SerializerTests: XCTestCase {
 
     func testDeserializeParametersBool() {
         let input = """
-            [
-              {
-                "d" : 100000,
-                "t" : "test",
-                "p" : false
-              }
-            ]
+            {
+              "date" : 100000,
+              "entries" : [
+                {
+                  "d" : 100000,
+                  "t" : "test",
+                  "p" : false
+                }
+              ]
+            }
             """
 
         let entry = sut.deserialize(data: input.data(using: .utf8)!)[0]
@@ -203,15 +234,18 @@ final class SerializerTests: XCTestCase {
 
     func testDeserializeParametersDictionary() {
         let input = """
-            [
-              {
-                "d" : 100000,
-                "t" : "test",
-                "p" : {
-                  "dict" : "yes"
+            {
+              "date" : 10000,
+              "entries" : [
+                {
+                  "d" : 100000,
+                  "t" : "test",
+                  "p" : {
+                    "dict" : "yes"
+                  }
                 }
-              }
-            ]
+              ]
+            }
             """
 
         let entry = sut.deserialize(data: input.data(using: .utf8)!)[0]
@@ -228,29 +262,45 @@ final class SerializerTests: XCTestCase {
         }
 
         let input = """
-            [
-              {
-                "d" : 100000,
-                "t" : "test",
-                "p" : {
-                  "string" : "string",
-                  "bool" : false
+            {
+              "date" : 10000,
+              "entries" : [
+                {
+                  "d" : 100000,
+                  "t" : "test",
+                  "p" : {
+                    "string" : "string",
+                    "bool" : false
+                  }
                 }
-              }
-            ]
+              ]
+            }
             """
 
         let entry = sut.deserialize(data: input.data(using: .utf8)!)[0]
 
         XCTAssertEqual(entry.date, Date.now)
         XCTAssertEqual(entry.type, "test")
-//        XCTAssertEqual(entry.parameters as? [String: Any], ["string": "string", "bool": false])
+        XCTAssertEqual((entry.parameters as? [String: Any])?["bool"] as? Bool, false)
+        XCTAssertEqual((entry.parameters as? [String: Any])?["string"] as? String, "string")
     }
 
     // MARK: -
 
     static var allTests = [
-        ("testSerializeType", testSerializeType)
+
+        ("testSerializeType", testSerializeType),
+        ("testSerializeParametersInt", testSerializeParametersInt),
+        ("testSerializeParametersString", testSerializeParametersString),
+        ("testSerializeParametersBool", testSerializeParametersBool),
+        ("testSerializeParametersDictionary", testSerializeParametersDictionary),
+        ("testSerializeParametersCustom", testSerializeParametersCustom),
+        ("testDeserializeType", testDeserializeType),
+        ("testDeserializeParametersInt", testDeserializeParametersInt),
+        ("testDeserializeParametersString", testDeserializeParametersString),
+        ("testDeserializeParametersBool", testDeserializeParametersBool),
+        ("testDeserializeParametersDictionary", testDeserializeParametersDictionary),
+        ("testDeserializeParametersCustom", testDeserializeParametersCustom)
     ]
 
 }

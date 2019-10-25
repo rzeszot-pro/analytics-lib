@@ -16,7 +16,7 @@ final class StorateTests: XCTestCase {
     // MARK: -
 
     func testExample() {
-
+        XCTAssertTrue(true)
     }
 
     // MARK: -

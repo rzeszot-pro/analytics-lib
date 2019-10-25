@@ -5,7 +5,8 @@ public func allTests() -> [XCTestCaseEntry] {
     return [
         testCase(CollectorTests.allTests),
         testCase(HardwareTests.allTests),
-        testCase(SerializerTests.allTests)
+        testCase(SerializerTests.allTests),
+        testCase(StorageTests.allTests)
     ]
 }
 #endif

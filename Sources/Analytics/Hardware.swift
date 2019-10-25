@@ -5,7 +5,11 @@
 //  Created by Damian Rzeszot on 24/10/2019.
 //
 
+import Foundation
+
+#if canImport(UIKit)
 import UIKit
+#endif
 
 public struct Hardware {
 
@@ -29,18 +33,25 @@ public struct Hardware {
 
     // MARK: -
 
-    internal init(device: UIDevice = .current) {
-        system = System(device: device)
+    internal init() {
+        system = System()
         model = Model()
     }
 
 }
 
 extension Hardware.System {
-    init(device: UIDevice) {
+    #if canImport(UIKit)
+    init(device: UIDevice = .current) {
         name = device.systemName.lowercased()
         version = device.systemVersion
     }
+    #else
+    init() {
+        name = "???"
+        version = "???"
+    }
+    #endif
 }
 
 extension Hardware.Model {

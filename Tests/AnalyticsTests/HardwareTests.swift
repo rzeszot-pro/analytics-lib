@@ -16,11 +16,19 @@ final class HardwareTests: XCTestCase {
     // MARK: - System
 
     func testSystemName() {
+        #if canImport(UIKit)
         XCTAssertEqual(sut.system.name, UIDevice.current.systemName.lowercased())
+        #else
+        XCTAssertEqual(sut.system.name, "???")
+        #endif
     }
 
     func testSystemVersion() {
+        #if canImport(UIKit)
         XCTAssertEqual(sut.system.version, UIDevice.current.systemVersion)
+        #else
+        XCTAssertEqual(sut.system.version, "???")
+        #endif
     }
 
     // MARK: - Model
@@ -33,7 +41,8 @@ final class HardwareTests: XCTestCase {
 
     static var allTests = [
         ("testSystemName", testSystemName),
-        ("testSystemVersion", testSystemVersion)
+        ("testSystemVersion", testSystemVersion),
+        ("testModelCode", testModelCode)
     ]
 
 }

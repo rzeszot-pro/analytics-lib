@@ -20,6 +20,11 @@ class Serializer {
 
     // MARK: -
 
+    internal var now: Date?
+
+
+    // MARK: -
+
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
 
@@ -38,7 +43,7 @@ class Serializer {
     // MARK: -
 
     func serialize(entries: [Entry]) -> Data {
-        let payload = Payload(date: Date(), entries: entries)
+        let payload = Payload(date: now ?? Date(), entries: entries)
         return try! encoder.encode(payload)
     }
 
