@@ -46,11 +46,15 @@ public class Analytics {
             collector.load(entries: entries)
 
             inspect("analytics | loaded \(entries.count) events")
-        }
 
-        collector.track("load", parameters: [
-            "count": collector.entries.count
-        ])
+            collector.track("load", parameters: [
+                "count": entries.count
+            ])
+        } else {
+            collector.track("load", parameters: [
+                "count": 0
+            ])
+        }
     }
 
     func track(_ type: String, parameters: Any?) {
