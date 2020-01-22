@@ -46,7 +46,7 @@ public class Core {
         collector.track(type: "init", parameters: context)
     }
 
-    func track(trace: String? = nil, type: String, parameters: Any?) {
+    func track(trace: [String] = [], type: String, parameters: Any?) {
         collector.track(trace: trace, type: type, parameters: parameters)
 
         let entries = collector.dispose()

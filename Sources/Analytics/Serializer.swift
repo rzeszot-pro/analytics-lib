@@ -65,7 +65,7 @@ extension Serializer.Entry: Codable {
         let container = try decoder.container(keyedBy: Key.self)
 
         date = try container.decode(Date.self, forKey: .date)
-        trace = try container.decodeIfPresent(String.self, forKey: .trace)
+        trace = try container.decodeIfPresent([String].self, forKey: .trace) ?? []
         type = try container.decode(String.self, forKey: .type)
         index = try container.decodeIfPresent(Int.self, forKey: .index) ?? -1
 
@@ -83,7 +83,7 @@ extension Serializer.Entry: Codable {
         try container.encode(type, forKey: .type)
         try container.encode(index, forKey: .index)
 
-        if let trace = trace {
+        if !trace.isEmpty {
             try container.encode(trace, forKey: .trace)
         }
 

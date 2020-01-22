@@ -18,7 +18,7 @@ final class SerializerTests: XCTestCase {
     // MARK: - Serialize
 
     func testSerializeType() {
-        let entry = Entry(date: .now, trace: nil, type: "test", index: 0, parameters: nil)
+        let entry = Entry(date: .now, trace: [], type: "test", index: 0, parameters: nil)
         let data = sut.serialize(entries: [entry])
 
         let result = """
@@ -37,7 +37,7 @@ final class SerializerTests: XCTestCase {
     }
 
     func testSerializeParametersInt() {
-        let entry = Entry(date: .now, trace: nil, type: "test", index: 1, parameters: 123)
+        let entry = Entry(date: .now, trace: [], type: "test", index: 1, parameters: 123)
         let data = sut.serialize(entries: [entry])
 
         let result = """
@@ -57,7 +57,7 @@ final class SerializerTests: XCTestCase {
     }
 
     func testSerializeParametersString() {
-        let entry = Entry(date: .now, trace: nil, type: "test", index: 2, parameters: "string")
+        let entry = Entry(date: .now, trace: [], type: "test", index: 2, parameters: "string")
         let data = sut.serialize(entries: [entry])
 
         let result = """
@@ -77,7 +77,7 @@ final class SerializerTests: XCTestCase {
     }
 
     func testSerializeParametersBool() {
-        let entry = Entry(date: .now, trace: nil, type: "test", index: 3, parameters: true)
+        let entry = Entry(date: .now, trace: [], type: "test", index: 3, parameters: true)
         let data = sut.serialize(entries: [entry])
 
         let result = """
@@ -97,7 +97,7 @@ final class SerializerTests: XCTestCase {
     }
 
     func testSerializeParametersDictionary() {
-        let entry = Entry(date: .now, trace: nil, type: "test", index: 4, parameters: ["dict": "yes"])
+        let entry = Entry(date: .now, trace: [], type: "test", index: 4, parameters: ["dict": "yes"])
         let data = sut.serialize(entries: [entry])
 
         let result = """
@@ -124,7 +124,7 @@ final class SerializerTests: XCTestCase {
             let bool: Bool
         }
 
-        let entry = Entry(date: .now, trace: nil, type: "test", index: 5, parameters: Custom(string: "string", bool: false))
+        let entry = Entry(date: .now, trace: [], type: "test", index: 5, parameters: Custom(string: "string", bool: false))
         let data = sut.serialize(entries: [entry])
 
         let result = """
