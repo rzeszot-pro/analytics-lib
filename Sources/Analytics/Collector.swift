@@ -16,8 +16,9 @@ class Collector {
     // MARK: -
 
     struct Entry {
-        var date: Date
+        let date: Date
         let type: String
+        let index: Int
         let parameters: Any?
     }
 
@@ -30,7 +31,7 @@ class Collector {
     // MARK: -
 
     func track(_ type: String, parameters: Any? = nil) {
-        let entry = Entry(date: .init(), type: type, parameters: parameters)
+        let entry = Entry(date: Date(), type: type, index: count, parameters: parameters)
 
         inspect("analytics | collector | track \(type)")
 

@@ -13,6 +13,8 @@ class Storage {
 
     private let path: URL
 
+    // MARK: - Initialization
+
     init(path: URL) {
         self.path = path
     }

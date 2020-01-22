@@ -1,7 +1,7 @@
 import XCTest
 @testable import Analytics
 
-final class StorateTests: XCTestCase {
+final class StorageTests: XCTestCase {
 
     var sut: Storage!
 

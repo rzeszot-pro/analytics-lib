@@ -19,7 +19,7 @@ final class SerializerTests: XCTestCase {
     // MARK: - Serialize
 
     func testSerializeType() {
-        let entry = Entry(date: .now, type: "test", parameters: nil)
+        let entry = Entry(date: .now, type: "test", index: 0, parameters: nil)
         let data = sut.serialize(entries: [entry])
 
         let result = """
@@ -28,7 +28,8 @@ final class SerializerTests: XCTestCase {
               "entries" : [
                 {
                   "d" : 100000,
-                  "t" : "test"
+                  "t" : "test",
+                  "i" : 0
                 }
               ]
             }
@@ -38,7 +39,7 @@ final class SerializerTests: XCTestCase {
     }
 
     func testSerializeParametersInt() {
-        let entry = Entry(date: .now, type: "test", parameters: 123)
+        let entry = Entry(date: .now, type: "test", index: 1, parameters: 123)
         let data = sut.serialize(entries: [entry])
 
         let result = """
@@ -47,8 +48,9 @@ final class SerializerTests: XCTestCase {
               "entries" : [
                 {
                   "d" : 100000,
-                  "t" : "test",
-                  "p" : 123
+                  "i" : 1,
+                  "p" : 123,
+                  "t" : "test"
                 }
               ]
             }
@@ -58,7 +60,7 @@ final class SerializerTests: XCTestCase {
     }
 
     func testSerializeParametersString() {
-        let entry = Entry(date: .now, type: "test", parameters: "string")
+        let entry = Entry(date: .now, type: "test", index: 2, parameters: "string")
         let data = sut.serialize(entries: [entry])
 
         let result = """
@@ -67,8 +69,9 @@ final class SerializerTests: XCTestCase {
               "entries" : [
                 {
                   "d" : 100000,
-                  "t" : "test",
-                  "p" : "string"
+                  "i" : 2,
+                  "p" : "string",
+                  "t" : "test"
                 }
               ]
             }
@@ -78,7 +81,7 @@ final class SerializerTests: XCTestCase {
     }
 
     func testSerializeParametersBool() {
-        let entry = Entry(date: .now, type: "test", parameters: true)
+        let entry = Entry(date: .now, type: "test", index: 3, parameters: true)
         let data = sut.serialize(entries: [entry])
 
         let result = """
@@ -87,8 +90,9 @@ final class SerializerTests: XCTestCase {
               "entries" : [
                 {
                   "d" : 100000,
-                  "t" : "test",
-                  "p" : true
+                  "i" : 3,
+                  "p" : true,
+                  "t" : "test"
                 }
               ]
             }
@@ -98,7 +102,7 @@ final class SerializerTests: XCTestCase {
     }
 
     func testSerializeParametersDictionary() {
-        let entry = Entry(date: .now, type: "test", parameters: ["dict": "yes"])
+        let entry = Entry(date: .now, type: "test", index: 4, parameters: ["dict": "yes"])
         let data = sut.serialize(entries: [entry])
 
         let result = """
@@ -107,10 +111,11 @@ final class SerializerTests: XCTestCase {
               "entries" : [
                 {
                   "d" : 100000,
-                  "t" : "test",
+                  "i" : 4,
                   "p" : {
                     "dict" : "yes"
-                  }
+                  },
+                  "t" : "test"
                 }
               ]
             }
@@ -125,7 +130,7 @@ final class SerializerTests: XCTestCase {
             let bool: Bool
         }
 
-        let entry = Entry(date: .now, type: "test", parameters: Custom(string: "string", bool: false))
+        let entry = Entry(date: .now, type: "test", index: 5, parameters: Custom(string: "string", bool: false))
         let data = sut.serialize(entries: [entry])
 
         let result = """
@@ -134,11 +139,12 @@ final class SerializerTests: XCTestCase {
               "entries" : [
                 {
                   "d" : 100000,
-                  "t" : "test",
+                  "i" : 5,
                   "p" : {
                     "string" : "string",
                     "bool" : false
-                  }
+                  },
+                  "t" : "test"
                 }
               ]
             }
@@ -156,7 +162,8 @@ final class SerializerTests: XCTestCase {
               "entries" : [
                 {
                   "d" : 100000,
-                  "t" : "test"
+                  "t" : "test",
+                  "i" : 0
                 }
               ]
             }
@@ -166,6 +173,7 @@ final class SerializerTests: XCTestCase {
 
         XCTAssertEqual(entry.date, Date.now)
         XCTAssertEqual(entry.type, "test")
+        XCTAssertEqual(entry.index, 0)
         XCTAssertNil(entry.parameters)
     }
 
@@ -177,6 +185,7 @@ final class SerializerTests: XCTestCase {
                 {
                   "d" : 100000,
                   "t" : "test",
+                  "i" : 1,
                   "p" : 123
                 }
               ]
@@ -187,6 +196,7 @@ final class SerializerTests: XCTestCase {
 
         XCTAssertEqual(entry.date, Date.now)
         XCTAssertEqual(entry.type, "test")
+        XCTAssertEqual(entry.index, 1)
         XCTAssertEqual(entry.parameters as? Int, 123)
     }
 
@@ -198,6 +208,7 @@ final class SerializerTests: XCTestCase {
                 {
                   "d" : 100000,
                   "t" : "test",
+                  "i" : 2,
                   "p" : "string"
                 }
               ]
@@ -208,6 +219,7 @@ final class SerializerTests: XCTestCase {
 
         XCTAssertEqual(entry.date, Date.now)
         XCTAssertEqual(entry.type, "test")
+        XCTAssertEqual(entry.index, 2)
         XCTAssertEqual(entry.parameters as? String, "string")
     }
 
@@ -219,6 +231,7 @@ final class SerializerTests: XCTestCase {
                 {
                   "d" : 100000,
                   "t" : "test",
+                  "i" : 3,
                   "p" : false
                 }
               ]
@@ -229,6 +242,7 @@ final class SerializerTests: XCTestCase {
 
         XCTAssertEqual(entry.date, Date.now)
         XCTAssertEqual(entry.type, "test")
+        XCTAssertEqual(entry.index, 3)
         XCTAssertEqual(entry.parameters as? Bool, false)
     }
 
@@ -240,6 +254,7 @@ final class SerializerTests: XCTestCase {
                 {
                   "d" : 100000,
                   "t" : "test",
+                  "i" : 4,
                   "p" : {
                     "dict" : "yes"
                   }
@@ -252,6 +267,7 @@ final class SerializerTests: XCTestCase {
 
         XCTAssertEqual(entry.date, Date.now)
         XCTAssertEqual(entry.type, "test")
+        XCTAssertEqual(entry.index, 4)
         XCTAssertEqual(entry.parameters as? [String: String], ["dict": "yes"])
     }
 
@@ -268,6 +284,7 @@ final class SerializerTests: XCTestCase {
                 {
                   "d" : 100000,
                   "t" : "test",
+                  "i" : 5,
                   "p" : {
                     "string" : "string",
                     "bool" : false
@@ -281,6 +298,7 @@ final class SerializerTests: XCTestCase {
 
         XCTAssertEqual(entry.date, Date.now)
         XCTAssertEqual(entry.type, "test")
+        XCTAssertEqual(entry.index, 5)
         XCTAssertEqual((entry.parameters as? [String: Any])?["bool"] as? Bool, false)
         XCTAssertEqual((entry.parameters as? [String: Any])?["string"] as? String, "string")
     }
@@ -288,7 +306,6 @@ final class SerializerTests: XCTestCase {
     // MARK: -
 
     static var allTests = [
-
         ("testSerializeType", testSerializeType),
         ("testSerializeParametersInt", testSerializeParametersInt),
         ("testSerializeParametersString", testSerializeParametersString),
