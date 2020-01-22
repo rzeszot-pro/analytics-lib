@@ -22,10 +22,10 @@ final class AnalyticsTests: XCTestCase {
 
         XCTAssertEqual(entries.count, 2)
 
-        XCTAssertEqual(entries[0].type, "init")
+        XCTAssertEqual(entries[0].type, "load")
+        XCTAssertEqual((entries[0].parameters as? [String:Int])?["count"], 0)
 
-        XCTAssertEqual(entries[1].type, "load")
-        XCTAssertEqual((entries[1].parameters as? [String:Int])?["count"], 0)
+        XCTAssertEqual(entries[1].type, "init")
     }
 
     // MARK: -
