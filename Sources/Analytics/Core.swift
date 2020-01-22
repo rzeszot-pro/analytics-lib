@@ -1,5 +1,5 @@
 //
-//  Analytics.swift
+//  Core.swift
 //  
 //
 //  Created by Damian Rzeszot on 24/10/2019.
@@ -8,19 +8,7 @@
 import Foundation
 
 
-public class Analytics {
-
-    public class func track(_ type: String, parameters: Any? = nil) {
-        shared.track(type, parameters: parameters)
-    }
-
-    public class func archive() {
-        shared.archive()
-    }
-
-    // MARK: -
-
-    private static let shared = Analytics()
+public class Core {
 
     // MARK: -
 

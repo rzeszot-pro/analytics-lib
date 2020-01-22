@@ -1,14 +1,14 @@
 import XCTest
 @testable import Analytics
 
-final class AnalyticsTests: XCTestCase {
+final class CoreTests: XCTestCase {
 
-    var sut: Analytics!
+    var sut: Core!
 
     override func setUp() {
         let context = Context(hardware: .test, session: .test)
 
-        sut = Analytics(context: context, storage: Storage(path: URL(string: "/tmp/events")!))
+        sut = Core(context: context, storage: Storage(path: URL(string: "/tmp/events")!))
     }
 
     override func tearDown() {
