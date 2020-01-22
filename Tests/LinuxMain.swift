@@ -9,5 +9,6 @@ tests += CoreTests.allTests()
 tests += HardwareTests.allTests()
 tests += SerializerTests.allTests()
 tests += StorageTests.allTests()
+tests += TraceTests.allTests()
 
 XCTMain(tests)
