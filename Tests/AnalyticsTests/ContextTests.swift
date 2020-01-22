@@ -8,7 +8,6 @@ final class ContextTests: XCTestCase {
         let context = Context(hardware: hardware, session: UUID(uuidString: "01234567-89AB-CDEF-0123-456789ABCDEF")!)
 
         let serializer = Serializer()
-        serializer.now = .now
 
         let entry = Serializer.Entry(date: .now, type: "init", index: 0, parameters: context)
 
@@ -16,7 +15,6 @@ final class ContextTests: XCTestCase {
 
         let result = """
             {
-              "date" : 100000,
               "entries" : [
                 {
                   "d" : 100000,
