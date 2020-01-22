@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Serializer.swift
 //  
 //
 //  Created by Damian Rzeszot on 24/10/2019.

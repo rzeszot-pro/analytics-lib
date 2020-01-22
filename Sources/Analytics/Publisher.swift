@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Publisher.swift
 //  
 //
 //  Created by Damian Rzeszot on 24/10/2019.
