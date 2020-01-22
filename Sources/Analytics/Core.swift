@@ -1,5 +1,5 @@
 //
-//  Analytics.swift
+//  Core.swift
 //  
 //
 //  Created by Damian Rzeszot on 24/10/2019.
@@ -8,19 +8,7 @@
 import Foundation
 
 
-public class Analytics {
-
-    public class func track(_ type: String, parameters: Any? = nil) {
-        shared.track(type, parameters: parameters)
-    }
-
-    public class func archive() {
-        shared.archive()
-    }
-
-    // MARK: -
-
-    private static let shared = Analytics()
+public class Core {
 
     // MARK: -
 
@@ -46,20 +34,20 @@ public class Analytics {
 
             inspect("analytics | loaded \(entries.count) events")
 
-            collector.track("load", parameters: [
+            collector.track(type: "load", parameters: [
                 "count": entries.count
             ])
         } else {
-            collector.track("load", parameters: [
+            collector.track(type: "load", parameters: [
                 "count": 0
             ])
         }
 
-        collector.track("init", parameters: context)
+        collector.track(type: "init", parameters: context)
     }
 
-    func track(_ type: String, parameters: Any?) {
-        collector.track(type, parameters: parameters)
+    func track(trace: String? = nil, type: String, parameters: Any?) {
+        collector.track(trace: trace, type: type, parameters: parameters)
 
         let entries = collector.dispose()
         guard entries.count > 0 else { return }

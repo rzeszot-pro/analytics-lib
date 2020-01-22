@@ -8,7 +8,7 @@ final class ContextTests: XCTestCase {
 
         let serializer = Serializer()
 
-        let entry = Serializer.Entry(date: .now, type: "init", index: 0, parameters: context)
+        let entry = Serializer.Entry(date: .now, trace: nil, type: "init", index: 0, parameters: context)
 
         let data = serializer.serialize(entries: [entry])
 

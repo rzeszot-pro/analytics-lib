@@ -24,7 +24,7 @@ final class CollectorTests: XCTestCase {
     }
 
     func testTrack() {
-        sut.track("example")
+        sut.track(type: "example")
 
         XCTAssertEqual(sut.count, 1)
     }
@@ -56,7 +56,7 @@ private extension Collector {
         precondition(times > 0)
 
         for _ in 0..<times {
-            track(type, parameters: parameters)
+            track(type: type, parameters: parameters)
         }
     }
 }
