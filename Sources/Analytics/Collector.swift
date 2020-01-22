@@ -16,7 +16,7 @@ class Collector {
     // MARK: -
 
     struct Entry {
-        var date: Date
+        let date: Date
         let type: String
         let parameters: Any?
     }
