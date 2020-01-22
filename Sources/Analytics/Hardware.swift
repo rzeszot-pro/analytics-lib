@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Hardware.swift
 //  
 //
 //  Created by Damian Rzeszot on 24/10/2019.
@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 #endif
 
-struct Hardware {
+struct Hardware: Encodable {
 
     // MARK: -
 
@@ -19,25 +19,24 @@ struct Hardware {
 
     // MARK: -
 
-    struct System {
+    struct System: Encodable {
         public let name: String
         public let version: String
     }
 
-    struct Model {
+    struct Model: Encodable {
         public let code: String
     }
 
     let system: System
     let model: Model
+}
 
-    // MARK: -
-
+extension Hardware {
     internal init() {
         system = System()
         model = Model()
     }
-
 }
 
 extension Hardware.System {

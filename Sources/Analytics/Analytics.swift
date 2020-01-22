@@ -27,23 +27,28 @@ public class Analytics {
     let collector = Collector()
     let storage = Storage()
     let serializer = Serializer()
-    let publisher = Publisher()
-    let hardware = Hardware.current
+
+    let publisher: Publisher
+    let context: Context
 
     // MARK: -
 
-    init() {
-        guard let data = storage.load() else { return }
+    init(context: Context = .standard) {
+        self.context = context
+        self.publisher = Publisher(session: context.session)
 
-        collector.track("init", parameters: [
-            "model": hardware.model.code,
-            "system": hardware.system.name + "_" + hardware.system.version
+        collector.track("init", parameters: context)
+
+        if let data = storage.load() {
+            let entries = serializer.deserialize(data: data)
+            collector.load(entries: entries)
+
+            inspect("analytics | loaded \(entries.count) events")
+        }
+
+        collector.track("load", parameters: [
+            "count": collector.entries.count
         ])
-
-        let entries = serializer.deserialize(data: data)
-        collector.load(entries: entries)
-
-        inspect("analytics | loaded \(entries.count) events")
     }
 
     func track(_ type: String, parameters: Any?) {

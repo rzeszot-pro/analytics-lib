@@ -322,6 +322,6 @@ final class SerializerTests: XCTestCase {
 
 }
 
-extension Date {
+private extension Date {
     static var now: Date = .init(timeIntervalSince1970: 100)
 }

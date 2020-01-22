@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Serializer.swift
 //  
 //
 //  Created by Damian Rzeszot on 24/10/2019.
@@ -150,8 +150,10 @@ struct AnyCodable: Codable {
     }
 
     func encode(to encoder: Encoder) throws {
-        if let value = value as? Codable {
+        if let value = value as? Encodable {
             try value.encode(to: encoder)
+        } else {
+            try "non_encodable_parameters".encode(to: encoder)
         }
     }
 
