@@ -24,18 +24,20 @@ public class Analytics {
 
     // MARK: -
 
-    let collector = Collector()
-    let storage = Storage()
-    let serializer = Serializer()
-
+    let collector: Collector
+    let storage: Storage
+    let serializer: Serializer
     let publisher: Publisher
     let context: Context
 
     // MARK: -
 
-    init(context: Context = .standard) {
+    init(context: Context = .standard, collector: Collector = .init(), storage: Storage = .init(), serializer: Serializer = .init()) {
         self.context = context
         self.publisher = Publisher(session: context.session)
+        self.collector = collector
+        self.storage = storage
+        self.serializer = serializer
 
         collector.track("init", parameters: context)
 
@@ -44,11 +46,15 @@ public class Analytics {
             collector.load(entries: entries)
 
             inspect("analytics | loaded \(entries.count) events")
-        }
 
-        collector.track("load", parameters: [
-            "count": collector.entries.count
-        ])
+            collector.track("load", parameters: [
+                "count": entries.count
+            ])
+        } else {
+            collector.track("load", parameters: [
+                "count": 0
+            ])
+        }
     }
 
     func track(_ type: String, parameters: Any?) {

@@ -14,14 +14,8 @@ class Serializer {
     typealias Entry = Collector.Entry
 
     struct Payload: Codable {
-        let date: Date
         let entries: [Entry]
     }
-
-    // MARK: -
-
-    internal var now: Date?
-
 
     // MARK: -
 
@@ -43,7 +37,7 @@ class Serializer {
     // MARK: -
 
     func serialize(entries: [Entry]) -> Data {
-        let payload = Payload(date: now ?? Date(), entries: entries)
+        let payload = Payload(entries: entries)
         return try! encoder.encode(payload)
     }
 
