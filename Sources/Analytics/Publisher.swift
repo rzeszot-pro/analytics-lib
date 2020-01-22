@@ -9,8 +9,13 @@ import Foundation
 
 class Publisher {
 
-    let session = UUID().uuidString.lowercased()
-    var url: URL = URL(string: "https://analytics.rzeszot.pro/api/collector")!
+    let session: UUID
+    let url: URL
+
+    init(session: UUID, url: URL = .endpoint) {
+        self.session = session
+        self.url = url
+    }
 
     func publish(data: Data) {
         inspect("analytics | publisher | publish")
@@ -21,11 +26,17 @@ class Publisher {
         request.timeoutInterval = 15
         request.allHTTPHeaderFields = [
             "content-type": "application/json",
-            "session-id": session
+            "session-id": session.uuidString.lowercased()
         ]
 
         let task = URLSession.shared.dataTask(with: request) { _, _, _ in }
         task.resume()
     }
 
+}
+
+private extension URL {
+    static var endpoint: URL {
+        URL(string: "https://analytics.rzeszot.pro/api/collector")!
+    }
 }
