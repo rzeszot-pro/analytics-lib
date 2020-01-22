@@ -12,11 +12,15 @@ public class Analytics {
     private static let core = Core()
 
     public class func track(_ type: String, parameters: Any? = nil) {
-        core.track(type, parameters: parameters)
+        core.track(type: type, parameters: parameters)
     }
 
     public class func archive() {
         core.archive()
+    }
+
+    public class func trace(_ name: String) -> Trace {
+        Trace(name: name, core: core)
     }
 
 }
