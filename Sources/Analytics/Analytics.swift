@@ -39,8 +39,6 @@ public class Analytics {
         self.storage = storage
         self.serializer = serializer
 
-        collector.track("init", parameters: context)
-
         if let data = storage.load() {
             let entries = serializer.deserialize(data: data)
             collector.load(entries: entries)
@@ -55,6 +53,8 @@ public class Analytics {
                 "count": 0
             ])
         }
+
+        collector.track("init", parameters: context)
     }
 
     func track(_ type: String, parameters: Any?) {
