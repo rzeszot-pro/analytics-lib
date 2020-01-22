@@ -9,7 +9,6 @@ final class SerializerTests: XCTestCase {
 
     override func setUp() {
         sut = Serializer()
-        sut.now = .now
     }
 
     override func tearDown() {
@@ -24,7 +23,6 @@ final class SerializerTests: XCTestCase {
 
         let result = """
             {
-              "date" : 100000,
               "entries" : [
                 {
                   "d" : 100000,
@@ -44,7 +42,6 @@ final class SerializerTests: XCTestCase {
 
         let result = """
             {
-              "date" : 100000,
               "entries" : [
                 {
                   "d" : 100000,
@@ -65,7 +62,6 @@ final class SerializerTests: XCTestCase {
 
         let result = """
             {
-              "date" : 100000,
               "entries" : [
                 {
                   "d" : 100000,
@@ -86,7 +82,6 @@ final class SerializerTests: XCTestCase {
 
         let result = """
             {
-              "date" : 100000,
               "entries" : [
                 {
                   "d" : 100000,
@@ -107,7 +102,6 @@ final class SerializerTests: XCTestCase {
 
         let result = """
             {
-              "date" : 100000,
               "entries" : [
                 {
                   "d" : 100000,
@@ -135,7 +129,6 @@ final class SerializerTests: XCTestCase {
 
         let result = """
             {
-              "date" : 100000,
               "entries" : [
                 {
                   "d" : 100000,
@@ -158,7 +151,6 @@ final class SerializerTests: XCTestCase {
     func testDeserializeType() {
         let input = """
             {
-              "date" : 100000,
               "entries" : [
                 {
                   "d" : 100000,
@@ -180,7 +172,6 @@ final class SerializerTests: XCTestCase {
     func testDeserializeParametersInt() {
         let input = """
             {
-              "date" : 100000,
               "entries" : [
                 {
                   "d" : 100000,
@@ -203,7 +194,6 @@ final class SerializerTests: XCTestCase {
     func testDeserializeParametersString() {
         let input = """
             {
-              "date" : 10000,
               "entries" : [
                 {
                   "d" : 100000,
@@ -226,7 +216,6 @@ final class SerializerTests: XCTestCase {
     func testDeserializeParametersBool() {
         let input = """
             {
-              "date" : 100000,
               "entries" : [
                 {
                   "d" : 100000,
@@ -249,7 +238,6 @@ final class SerializerTests: XCTestCase {
     func testDeserializeParametersDictionary() {
         let input = """
             {
-              "date" : 10000,
               "entries" : [
                 {
                   "d" : 100000,
@@ -279,7 +267,6 @@ final class SerializerTests: XCTestCase {
 
         let input = """
             {
-              "date" : 10000,
               "entries" : [
                 {
                   "d" : 100000,
