@@ -9,11 +9,9 @@ import Foundation
 
 class Publisher {
 
-    let session: UUID
     let url: URL
 
-    init(session: UUID, url: URL = .endpoint) {
-        self.session = session
+    init(url: URL = .endpoint) {
         self.url = url
     }
 
@@ -25,8 +23,7 @@ class Publisher {
         request.httpBody = data
         request.timeoutInterval = 15
         request.allHTTPHeaderFields = [
-            "content-type": "application/json",
-            "session-id": session.uuidString.lowercased()
+            "content-type": "application/json"
         ]
 
         let task = URLSession.shared.dataTask(with: request) { _, _, _ in }

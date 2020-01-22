@@ -32,9 +32,10 @@ public class Analytics {
 
     // MARK: -
 
-    init(context: Context = .standard, collector: Collector = .init(), storage: Storage = .init(), serializer: Serializer = .init()) {
+    init(context: Context = .standard, publisher: Publisher = .init(), collector: Collector = .init(), storage: Storage = .init(), serializer: Serializer = .init()) {
         self.context = context
-        self.publisher = Publisher(session: context.session)
+
+        self.publisher = publisher
         self.collector = collector
         self.storage = storage
         self.serializer = serializer
