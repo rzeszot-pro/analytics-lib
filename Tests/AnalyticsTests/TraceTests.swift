@@ -10,7 +10,7 @@ final class TraceTests: XCTestCase {
         let context = Context(hardware: .test, session: .test)
         core = Core(context: context, storage: Storage(path: URL(string: "/tmp/events")!))
 
-        sut = Trace(name: "sample", core: core)
+        sut = Trace(path: ["sample"], core: core)
     }
 
     override func tearDown() {
@@ -28,10 +28,10 @@ final class TraceTests: XCTestCase {
 
         XCTAssertEqual(entries.count, 4)
 
-        XCTAssertEqual(entries[2].trace, "sample")
+        XCTAssertEqual(entries[2].trace, ["sample"])
         XCTAssertEqual(entries[2].type, "first")
 
-        XCTAssertEqual(entries[3].trace, "sample")
+        XCTAssertEqual(entries[3].trace, ["sample"])
         XCTAssertEqual(entries[3].type, "second")
     }
 

@@ -20,7 +20,7 @@ public class Analytics {
     }
 
     public class func trace(_ name: String) -> Trace {
-        Trace(name: name, core: core)
+        Trace(path: [name], core: core)
     }
 
 }
