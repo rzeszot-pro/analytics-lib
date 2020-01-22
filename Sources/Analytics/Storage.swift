@@ -42,7 +42,12 @@ class Storage {
         do {
             return try Data(contentsOf: path)
         } catch {
-            inspect("analytics | storage | load error \(error) ")
+            if (error as NSError).domain == NSCocoaErrorDomain, (error as NSError).code == 260 {
+                inspect("analytics | storage | load error - nothing to load")
+            } else {
+                inspect("analytics | storage | load error \(error) ")
+            }
+
             return nil
         }
     }
