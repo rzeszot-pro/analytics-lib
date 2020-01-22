@@ -34,7 +34,7 @@ class Collector {
     func track(trace: [String] = [], type: String, parameters: Any? = nil) {
         let entry = Entry(date: Date(), trace: trace, type: type, index: count, parameters: parameters)
 
-        inspect("analytics | collector | track \(type)")
+        inspect("analytics | collector | track \(trace.joined(separator: ".")).\(type)")
 
         entries.append(entry)
     }
