@@ -33,15 +33,19 @@ public class Analytics {
     // MARK: -
 
     init() {
-        guard let data = storage.load() else { return }
-
         collector.track("init", parameters: [
             "model": hardware.model.code,
             "system": hardware.system.name + "_" + hardware.system.version
         ])
 
-        let entries = serializer.deserialize(data: data)
-        collector.load(entries: entries)
+        if let data = storage.load() {
+            let entries = serializer.deserialize(data: data)
+            collector.load(entries: entries)
+
+            collector.track("load", parameters: [
+                "count": entries.count
+            ])
+        }
 
         inspect("analytics | loaded \(entries.count) events")
     }
