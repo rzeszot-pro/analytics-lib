@@ -4,8 +4,7 @@ import XCTest
 final class ContextTests: XCTestCase {
 
     func testSerializeContext() {
-        let hardware = Hardware(system: .init(name: "ios", version: "13.0"), model: .init(code: "simulator"))
-        let context = Context(hardware: hardware, session: UUID(uuidString: "01234567-89AB-CDEF-0123-456789ABCDEF")!)
+        let context = Context(hardware: .test, session: UUID.test)
 
         let serializer = Serializer()
 
@@ -48,4 +47,16 @@ final class ContextTests: XCTestCase {
 
 private extension Date {
     static var now: Date = .init(timeIntervalSince1970: 100)
+}
+
+private extension Hardware {
+    static var test: Hardware {
+        Hardware(system: .init(name: "ios", version: "13.0"), model: .init(code: "simulator"))
+    }
+}
+
+private extension UUID {
+    static var test: UUID {
+        UUID(uuidString: "01234567-89AB-CDEF-0123-456789ABCDEF")!
+    }
 }
