@@ -71,6 +71,7 @@ extension Serializer.Entry: Codable {
 
         date = try container.decode(Date.self, forKey: .date)
         type = try container.decode(String.self, forKey: .type)
+        index = try container.decodeIfPresent(Int.self, forKey: .index) ?? -1
 
         if container.contains(.parameters) {
             parameters = try container.decode(AnyCodable.self, forKey: .parameters).value
