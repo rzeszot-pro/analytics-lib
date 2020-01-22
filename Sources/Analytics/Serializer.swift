@@ -63,6 +63,7 @@ extension Serializer.Entry: Codable {
         case date = "d"
         case type = "t"
         case parameters = "p"
+        case index = "i"
     }
 
     init(from decoder: Decoder) throws {
@@ -83,6 +84,7 @@ extension Serializer.Entry: Codable {
 
         try container.encode(date, forKey: .date)
         try container.encode(type, forKey: .type)
+        try container.encode(index, forKey: .index)
 
         if let parameters = parameters {
             try container.encode(AnyCodable(value: parameters), forKey: .parameters)
