@@ -29,6 +29,8 @@ class Serializer {
         decoder.dateDecodingStrategy = .millisecondsSince1970
         decoder.keyDecodingStrategy = .convertFromSnakeCase
 
+        encoder.outputFormatting = [.withoutEscapingSlashes]
+
         #if DEBUG
         encoder.outputFormatting = .prettyPrinted
         #endif
@@ -153,7 +155,7 @@ struct AnyCodable: Codable {
         if let value = value as? Encodable {
             try value.encode(to: encoder)
         } else {
-            try "non_encodable_parameters".encode(to: encoder)
+            try "non_encodable_parameters # \(type(of: value))".encode(to: encoder)
         }
     }
 
