@@ -154,6 +154,18 @@ struct AnyCodable: Codable {
     func encode(to encoder: Encoder) throws {
         if let value = value as? Encodable {
             try value.encode(to: encoder)
+        } else if let dictionary = value as? [String: Any] {
+            var container = encoder.container(keyedBy: Key.self)
+
+            for (key, value) in dictionary {
+                try container.encode(AnyCodable(value: value), forKey: Key(stringValue: key)!)
+            }
+        } else if let array = value as? [Any] {
+            var container = encoder.unkeyedContainer()
+
+            for value in array {
+                try container.encode(AnyCodable(value: value))
+            }
         } else {
             try "non_encodable_parameters # \(type(of: value))".encode(to: encoder)
         }

@@ -118,6 +118,55 @@ final class SerializerTests: XCTestCase {
         XCTAssertEqual(String(data: data, encoding: .utf8)!, result)
     }
 
+    func testSerializeParametersDictionary2() {
+        let dict: Dictionary<String, Any> = ["dict": "yes"]
+
+        let entry = Entry(date: .now, trace: [], type: "test", index: 4, parameters: dict)
+        let data = sut.serialize(entries: [entry])
+
+        let result = """
+            {
+              "entries" : [
+                {
+                  "d" : 100000,
+                  "i" : 4,
+                  "p" : {
+                    "dict" : "yes"
+                  },
+                  "t" : "test"
+                }
+              ]
+            }
+            """
+
+        XCTAssertEqual(String(data: data, encoding: .utf8)!, result)
+    }
+
+    func testSerializeParametersArray() {
+        let array: Array<Any> = [1, "yes"]
+
+        let entry = Entry(date: .now, trace: [], type: "test", index: 4, parameters: array)
+        let data = sut.serialize(entries: [entry])
+
+        let result = """
+            {
+              "entries" : [
+                {
+                  "d" : 100000,
+                  "i" : 4,
+                  "p" : [
+                    1,
+                    "yes"
+                  ],
+                  "t" : "test"
+                }
+              ]
+            }
+            """
+
+        XCTAssertEqual(String(data: data, encoding: .utf8)!, result)
+    }
+
     func testSerializeParametersCustom() {
         struct Custom: Codable {
             let string: String
@@ -298,6 +347,8 @@ final class SerializerTests: XCTestCase {
         ("testSerializeParametersString", testSerializeParametersString),
         ("testSerializeParametersBool", testSerializeParametersBool),
         ("testSerializeParametersDictionary", testSerializeParametersDictionary),
+        ("testSerializeParametersDictionary2", testSerializeParametersDictionary2),
+        ("testSerializeParametersArray", testSerializeParametersArray),
         ("testSerializeParametersCustom", testSerializeParametersCustom),
         ("testDeserializeType", testDeserializeType),
         ("testDeserializeParametersInt", testDeserializeParametersInt),
